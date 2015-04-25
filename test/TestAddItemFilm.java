@@ -1,0 +1,204 @@
+package test;
+import java.util.LinkedList;
+
+import avis.SocialNetwork;
+import exception.BadEntry;
+import exception.ItemFilmAlreadyExists;
+import exception.ItemBookAlreadyExists;
+import exception.MemberAlreadyExists;
+import exception.NotItem;
+import exception.NotMember;
+/** 
+ * @author B. Prou, E. Cousin
+ * @date mars 2015
+ * @version V1.0
+ */
+
+public class TestAddItemFilm {
+	
+	public static int addItemFilmBadEntryTest (SocialNetwork sn, String pseudo, String pwd, String titre, String genre, String realisateur, String scenariste, int duree, String idTest, String messErreur){
+		// vérifie que l'ajout d'un film (pseudo, pwd, titre, genre, realisateur, scenariste, duree) est refusée (levée de l'exception BadEntry et  pas de modification du sn)
+		// si c'est bien le cas, ne fait rien
+		// sinon, affiche le message d'erreur passé en paramètre
+		int nbFilms = sn.nbFilms();
+		try {
+			sn.addItemFilm (pseudo, pwd, titre, genre, realisateur, scenariste, duree);
+			System.out.println ("Test " + idTest + " : " + messErreur);
+			return 1;
+		}
+		catch (BadEntry e) {
+			if (sn.nbFilms() != nbFilms) {
+				System.out.println("Test " + idTest + " : l'exception BadEntry a bien été levée mais le nombre de films a été modifié");
+				return 1;
+			}
+			else 
+				return 0;
+		}
+		catch (Exception e) {
+			System.out.println ("Test " + idTest + " : exception non prévue. " + e); 
+			e.printStackTrace();
+			return 1;
+		}
+	}
+
+	public static int addItemFilmOKTest (SocialNetwork sn, String pseudo, String pwd, String titre, String genre, String realisateur, String scenariste, int duree, String idTest){
+		int nbFilms = sn.nbFilms();
+		try{
+			sn.addItemFilm (pseudo, pwd, titre, genre, realisateur, scenariste, duree);
+			if (sn.nbFilms() != nbFilms+1) {
+				System.out.println("Test " + idTest + " :  le nombre de itemFilms n'a pas été correctement incrémenté");
+				return 1;
+			}
+			else 
+				return 0;
+		}
+		catch (Exception e) {
+			System.out.println ("Test " + idTest + " : exception non prévue. " + e); 
+			e.printStackTrace();
+			return 1;
+		}
+	}
+
+	public static int addItemFilmAlreadyExistsTest (SocialNetwork sn, String pseudo, String pwd, String titre, String genre, String realisateur, String scenariste, int duree, String idTest, String messErreur){
+		int nbFilms = sn.nbFilms();
+		try {
+			sn.addItemFilm (pseudo, pwd, titre, genre, realisateur, scenariste, duree);
+			System.out.println ("Test " + idTest + " : " + messErreur);
+			return 1;
+		}
+		catch (ItemFilmAlreadyExists e) {
+			if (sn.nbFilms() != nbFilms) {
+				System.out.println("Test " + idTest + " : l'exception ItemFilmAlreadyExists a bien été levée mais le nombre de itemFilms a été modifié");
+				return 1;
+			}
+			else
+				return 0;
+		}
+		catch (Exception e) {
+			System.out.println ("Test " + idTest + " : exception non prévue. " + e); 
+			e.printStackTrace();
+			return 1;
+		}
+	}
+	
+	public static int addItemFilmNotMember (SocialNetwork sn, String pseudo, String pwd, String titre, String genre, String realisateur, String scenariste, int duree, String idTest, String messErreur){
+		int nbFilms = sn.nbFilms();
+		try {
+			sn.addItemFilm (pseudo, pwd, titre, genre, realisateur, scenariste, duree);
+			System.out.println ("Test " + idTest + " : " + messErreur);
+			return 1;
+		}
+		catch (NotMember e) {
+			if (sn.nbFilms() != nbFilms) {
+				System.out.println("Test " + idTest + " : l'exception ItemFilmAlreadyExists a bien été levée mais le nombre de itemFilms a été modifié");
+				return 1;
+			}
+			else
+				return 0;
+		}
+		catch (Exception e) {
+			System.out.println ("Test " + idTest + " : exception non prévue. " + e); 
+			e.printStackTrace();
+			return 1;
+		}
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int nbLivres = 0;
+		int nbFilms = 0;
+		int nbMembres = 0;
+
+		int nbTests = 0;
+		int nbErreurs = 0;
+		
+		System.out.println("Tests  ajouter des itemFilms au réseau social  ");
+
+
+		SocialNetwork sn = new SocialNetwork();
+
+		// tests de additemFilm
+		nbFilms = sn.nbFilms();
+		nbLivres = sn.nbBooks();
+		nbMembres = sn.nbMembers();
+
+		// <=> fiche numéro 1
+
+		// tentative d'ajout de itemFilms avec entrées "incorrectes"
+
+		nbTests++;
+		nbErreurs += addItemFilmBadEntryTest ( sn, null, "qsdfgh", "a", "", "", "", 1, "1.1", "L'ajout d'un itemFilm dont le pseudo n'est pas instancié est accepté");
+		nbTests++;
+		nbErreurs += addItemFilmBadEntryTest ( sn, " ", "qsdfgh", "a", "", "", "", 1, "1.2", "L'ajout d'un itemFilm dont le pseudo ne contient que des espaces est accepté");
+		nbTests++;
+		nbErreurs += addItemFilmBadEntryTest ( sn, "B", null, "a", "", "", "", 1, "1.3", "L'ajout d'un itemFilm dont le password n'est pas instancié est accepté");
+		nbTests++;
+		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "   qwd", "a", "", "", "", 1, "1.4", "L'ajout d'un itemFilm dont le password a moins de 4 caratères et est accepté");
+		nbTests++;
+		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "qsdfgh", null, "", "", "", 1, "1.5", "L'ajout d'un itemFilm dont le titre n'est pas instancié est accepté");
+		nbTests++;
+		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "qsdfgh", " ", "", "", "", 1, "1.6", "L'ajout d'un itemFilm dont le titre ne contient que des espaces est accepté");
+		nbTests++;
+		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "qsdfgh", "a", null, "", "", 1, "1.7", "L'ajout d'un itemFilm dont le genre n'est pas instancié est accepté");
+		nbTests++;
+		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "qsdfgh", "a", "", null, "", 1, "1.8", "L'ajout d'un itemFilm dont le réalisateur n'est pas instancié est accepté");
+		nbTests++;
+		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "qsdfgh", "a", "", "", null, 1, "1.9", "L'ajout d'un itemFilm dont le scénariste n'est pas instancié est accepté");
+		nbTests++;
+		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "qsdfgh", "a", "", "", "", 0, "1.10", "L'ajout d'un itemFilm dont la durée non positive est accepté");
+
+
+		// <=> fiche numéro 2
+
+		// ajout de 3 itemFilms avec entrées "correctes"
+
+		nbTests++;
+		nbErreurs += addItemFilmOKTest (sn, "Paul", "paul", "Jurassic Park", "", "", "", 1, "2.1a");
+		nbTests++;
+		nbErreurs += addItemFilmOKTest (sn, "Antoine", "antoine", "Star Wars", "", "", "", 1, "2.1b");
+		nbTests++;
+		nbErreurs += addItemFilmOKTest (sn, "Alice", "alice", "Back to the Future", "", "", "", 1, "2.1c");
+
+		// tentative d'ajout de membre "existant"
+
+		nbTests++;
+		nbErreurs += addItemFilmAlreadyExistsTest(sn, "Paul", "paul", new String("Jurassic Park"), "", "", "", 1, "2.2", "L'ajout d'un itemFilm avec le titre du premier itemFilm ajouté est accepté");
+		nbTests++;
+		nbErreurs += addItemFilmAlreadyExistsTest(sn, "Alice", "alice",  new String("Back to the Future"), "", "", "", 1, "2.3", "L'ajout d'un itemFilm avec le titre du dernier itemFilm ajouté est accepté");
+		nbTests++;
+		nbErreurs += addItemFilmAlreadyExistsTest(sn, "Antoine", "antoine", new String("staR warS"), "", "", "", 1, "2.4", "L'ajout d'un itemFilm  avec un titre existant (avec casse différente) est accepté");
+		nbTests++;
+		nbErreurs += addItemFilmAlreadyExistsTest(sn, "Antoine", "antoine", new String(" Star Wars "), "", "", "", 1, "2.5", "L'ajout d'un itemFilm avec un titre existant (avec leading et trailing blanks) est accepté");		
+
+		// tentative d'ajout de itemFilm avec un mauvais membre
+		nbTests++;
+		nbErreurs += addItemFilmAlreadyExistsTest(sn, "Michel", "paul", "Lord of the Ring", "", "", "", 1, "2.6", "L'ajout d'un itemFilm avec le titre du premier itemFilm ajouté est accepté");
+		nbTests++;
+		nbErreurs += addItemFilmAlreadyExistsTest(sn, "Paul", "antoine", "Harry Potter", "", "", "", 1, "2.7", "L'ajout d'un itemFilm avec le titre du premier itemFilm ajouté est accepté");
+		
+		
+		nbTests++;
+		if (nbFilms != sn.nbFilms()) {
+			System.out.println("Erreur  :  le nombre de films après utilisation de addItemFilm a été modifié");
+			nbErreurs++;
+		}
+		nbTests++;
+		if (nbLivres != sn.nbBooks()) {
+			System.out.println("Erreur  :  le nombre de livres après utilisation de addItemFilm a été modifié");	
+			nbErreurs++;
+		}
+		nbTests++;
+		if (nbMembres != sn.nbMembers()) {
+			System.out.println("Erreur  :  le nombre de membres après utilisation de addItemFilm a été modifié");	
+			nbErreurs++;
+		}
+
+		// ce n'est pas du test, mais cela peut "rassurer"...
+		System.out.println(sn);
+
+		// bilan du test de addItemFilm
+		System.out.println("TestsAddItemFilm :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués");
+
+	}
+
+}
