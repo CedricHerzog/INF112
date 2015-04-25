@@ -4,13 +4,10 @@ import java.util.LinkedList;
 import avis.SocialNetwork;
 import exception.BadEntry;
 import exception.ItemFilmAlreadyExists;
-import exception.ItemBookAlreadyExists;
-import exception.MemberAlreadyExists;
-import exception.NotItem;
 import exception.NotMember;
 /** 
- * @author B. Prou, E. Cousin
- * @date mars 2015
+ * @author C. Manda, C. Herzog
+ * @date avril 2015
  * @version V1.0
  */
 
@@ -81,7 +78,7 @@ public class TestAddItemFilm {
 		}
 	}
 	
-	public static int addItemFilmNotMember (SocialNetwork sn, String pseudo, String pwd, String titre, String genre, String realisateur, String scenariste, int duree, String idTest, String messErreur){
+	public static int addItemFilmNotMemberTest (SocialNetwork sn, String pseudo, String pwd, String titre, String genre, String realisateur, String scenariste, int duree, String idTest, String messErreur){
 		int nbFilms = sn.nbFilms();
 		try {
 			sn.addItemFilm (pseudo, pwd, titre, genre, realisateur, scenariste, duree);
@@ -172,9 +169,9 @@ public class TestAddItemFilm {
 
 		// tentative d'ajout de itemFilm avec un mauvais membre
 		nbTests++;
-		nbErreurs += addItemFilmAlreadyExistsTest(sn, "Michel", "paul", "Lord of the Ring", "", "", "", 1, "2.6", "L'ajout d'un itemFilm avec le titre du premier itemFilm ajouté est accepté");
+		nbErreurs += addItemFilmNotMemberTest(sn, "Michel", "paul", "Lord of the Ring", "", "", "", 1, "2.6", "L'ajout d'un itemFilm avec un mauvais membre est accepté");
 		nbTests++;
-		nbErreurs += addItemFilmAlreadyExistsTest(sn, "Paul", "antoine", "Harry Potter", "", "", "", 1, "2.7", "L'ajout d'un itemFilm avec le titre du premier itemFilm ajouté est accepté");
+		nbErreurs += addItemFilmNotMemberTest(sn, "Paul", "antoine", "Harry Potter", "", "", "", 1, "2.7", "L'ajout d'un itemFilm avec un pseudo est un password qui ne correspondent pas est accepté");
 		
 		
 		nbTests++;
