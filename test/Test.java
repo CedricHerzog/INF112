@@ -29,13 +29,12 @@ public class Test {
            TestAddItemFilm.main(resultats);
            System.out.println("\n\n ***************************************\n");
            
-           //
-           // TestReviewItemFilm.main(resultats);
+           //Lancement du test de commentaire
+           TestReviewItemFilm.main(resultats);
            
-         //  System.out.println("\n\n ***************************************\n");
+           System.out.println("\n\n ***************************************\n");
            
-           // .... d'autres appels à des tests
-           
+                      
            System.out.println("Bilan des Tests :   " + resultats[1] +
                               " erreur(s) / " +  resultats[0] + " tests effectués");
            

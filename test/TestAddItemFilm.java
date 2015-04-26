@@ -114,10 +114,7 @@ public class TestAddItemFilm {
 
 		SocialNetwork sn = new SocialNetwork();
 
-		// tests de additemFilm
-		nbFilms = sn.nbFilms();
-		nbLivres = sn.nbBooks();
-		nbMembres = sn.nbMembers();
+		
 		
 		//Instanciation de membres
 		try {
@@ -131,7 +128,9 @@ public class TestAddItemFilm {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		// tests de additemFilm
+				nbLivres = sn.nbBooks();
+				nbMembres = sn.nbMembers();
 
 		// <=> fiche numéro 3
 
@@ -187,12 +186,6 @@ public class TestAddItemFilm {
 		nbTests++;
 		nbErreurs += addItemFilmNotMemberTest(sn, "Paul", "antoine", "Harry Potter", "", "", "", 1, "2.7", "L'ajout d'un itemFilm avec un pseudo est un password qui ne correspondent pas est accepté");
 		
-		
-		nbTests++;
-		if (nbFilms != sn.nbFilms()) {
-			System.out.println("Erreur  :  le nombre de films après utilisation de addItemFilm a été modifié");
-			nbErreurs++;
-		}
 		nbTests++;
 		if (nbLivres != sn.nbBooks()) {
 			System.out.println("Erreur  :  le nombre de livres après utilisation de addItemFilm a été modifié");	
