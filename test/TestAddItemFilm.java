@@ -119,7 +119,7 @@ public class TestAddItemFilm {
 		nbLivres = sn.nbBooks();
 		nbMembres = sn.nbMembers();
 
-		// <=> fiche numéro 1
+		// <=> fiche numéro 2
 
 		// tentative d'ajout de itemFilms avec entrées "incorrectes"
 
@@ -145,7 +145,7 @@ public class TestAddItemFilm {
 		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "qsdfgh", "a", "", "", "", 0, "1.10", "L'ajout d'un itemFilm dont la durée non positive est accepté");
 
 
-		// <=> fiche numéro 2
+		// <=> fiche numéro 3
 
 		// ajout de 3 itemFilms avec entrées "correctes"
 
@@ -196,6 +196,12 @@ public class TestAddItemFilm {
 		// bilan du test de addItemFilm
 		System.out.println("TestsAddItemFilm :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués");
 
+		//On modifie l'argument qui sera utilisé dans le prochain test
+		if ((args != null) && (args.length == 2)) {        
+            nbTests = nbTests + new Integer(args[0]);
+            nbErreurs = nbErreurs + new Integer(args[1]);       
+            args[0] = "" + nbTests;
+            args[1] = "" + nbErreurs;
+         }
 	}
-
 }

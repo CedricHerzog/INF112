@@ -3,7 +3,6 @@ package test;
 import java.util.LinkedList;
 
 import avis.SocialNetwork;
-
 import exception.BadEntry;
 import exception.ItemFilmAlreadyExists;
 import exception.ItemBookAlreadyExists;
@@ -162,6 +161,13 @@ public class TestsAddMember {
 
 		// bilan du test de addMember
 		System.out.println("TestsAddMember :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués");
-
+		
+		//On modifie l'argument qui sera utilisé dans le prochain test
+		if ((args != null) && (args.length == 2)) {        
+            nbTests = nbTests + new Integer(args[0]);
+            nbErreurs = nbErreurs + new Integer(args[1]);       
+            args[0] = "" + nbTests;
+            args[1] = "" + nbErreurs;
+         }
 	}
 }
