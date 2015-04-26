@@ -1,9 +1,9 @@
 package test;
-import java.util.LinkedList;
 
 import avis.SocialNetwork;
 import exception.BadEntry;
 import exception.ItemFilmAlreadyExists;
+import exception.MemberAlreadyExists;
 import exception.NotMember;
 /** 
  * @author C. Manda, C. Herzog
@@ -118,34 +118,48 @@ public class TestAddItemFilm {
 		nbFilms = sn.nbFilms();
 		nbLivres = sn.nbBooks();
 		nbMembres = sn.nbMembers();
+		
+		//Instanciation de membres
+		try {
+			sn.addMember("Antoine", "antoine", "grand amoureux de la littérature");
+			sn.addMember("Alice", "alice", "20 ans, sexy");
+			sn.addMember("Paul", "paul", "lecteur impulsif");
+		} catch (BadEntry e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (MemberAlreadyExists e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 
-		// <=> fiche numéro 2
+		// <=> fiche numéro 3
 
 		// tentative d'ajout de itemFilms avec entrées "incorrectes"
 
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, null, "qsdfgh", "a", "", "", "", 1, "1.1", "L'ajout d'un itemFilm dont le pseudo n'est pas instancié est accepté");
+		nbErreurs += addItemFilmBadEntryTest ( sn, null, "antoine", "a", "", "", "", 1, "1.1", "L'ajout d'un itemFilm dont le pseudo n'est pas instancié est accepté");
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, " ", "qsdfgh", "a", "", "", "", 1, "1.2", "L'ajout d'un itemFilm dont le pseudo ne contient que des espaces est accepté");
+		nbErreurs += addItemFilmBadEntryTest ( sn, " ", "antoine", "a", "", "", "", 1, "1.2", "L'ajout d'un itemFilm dont le pseudo ne contient que des espaces est accepté");
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, "B", null, "a", "", "", "", 1, "1.3", "L'ajout d'un itemFilm dont le password n'est pas instancié est accepté");
+		nbErreurs += addItemFilmBadEntryTest ( sn, "Antoine", null, "a", "", "", "", 1, "1.3", "L'ajout d'un itemFilm dont le password n'est pas instancié est accepté");
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "   qwd", "a", "", "", "", 1, "1.4", "L'ajout d'un itemFilm dont le password a moins de 4 caratères et est accepté");
+		nbErreurs += addItemFilmBadEntryTest ( sn, "Antoine", "   qwd", "a", "", "", "", 1, "1.4", "L'ajout d'un itemFilm dont le password a moins de 4 caratères et est accepté");
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "qsdfgh", null, "", "", "", 1, "1.5", "L'ajout d'un itemFilm dont le titre n'est pas instancié est accepté");
+		nbErreurs += addItemFilmBadEntryTest ( sn, "Antoine", "antoine", null, "", "", "", 1, "1.5", "L'ajout d'un itemFilm dont le titre n'est pas instancié est accepté");
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "qsdfgh", " ", "", "", "", 1, "1.6", "L'ajout d'un itemFilm dont le titre ne contient que des espaces est accepté");
+		nbErreurs += addItemFilmBadEntryTest ( sn, "Antoine", "antoine", " ", "", "", "", 1, "1.6", "L'ajout d'un itemFilm dont le titre ne contient que des espaces est accepté");
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "qsdfgh", "a", null, "", "", 1, "1.7", "L'ajout d'un itemFilm dont le genre n'est pas instancié est accepté");
+		nbErreurs += addItemFilmBadEntryTest ( sn, "Antoine", "antoine", "a", null, "", "", 1, "1.7", "L'ajout d'un itemFilm dont le genre n'est pas instancié est accepté");
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "qsdfgh", "a", "", null, "", 1, "1.8", "L'ajout d'un itemFilm dont le réalisateur n'est pas instancié est accepté");
+		nbErreurs += addItemFilmBadEntryTest ( sn, "Antoine", "antoine", "a", "", null, "", 1, "1.8", "L'ajout d'un itemFilm dont le réalisateur n'est pas instancié est accepté");
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "qsdfgh", "a", "", "", null, 1, "1.9", "L'ajout d'un itemFilm dont le scénariste n'est pas instancié est accepté");
+		nbErreurs += addItemFilmBadEntryTest ( sn, "Antoine", "antoine", "a", "", "", null, 1, "1.9", "L'ajout d'un itemFilm dont le scénariste n'est pas instancié est accepté");
 		nbTests++;
-		nbErreurs += addItemFilmBadEntryTest ( sn, "B", "qsdfgh", "a", "", "", "", 0, "1.10", "L'ajout d'un itemFilm dont la durée non positive est accepté");
+		nbErreurs += addItemFilmBadEntryTest ( sn, "Antoine", "antoine", "a", "", "", "", 0, "1.10", "L'ajout d'un itemFilm dont la durée non positive est accepté");
 
 
-		// <=> fiche numéro 3
+		// <=> fiche numéro 4
 
 		// ajout de 3 itemFilms avec entrées "correctes"
 
@@ -197,6 +211,7 @@ public class TestAddItemFilm {
 		System.out.println("TestsAddItemFilm :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués");
 
 		//On modifie l'argument qui sera utilisé dans le prochain test
+		//Comme l'argument est de type string, on doit effectuer des conversion de type
 		if ((args != null) && (args.length == 2)) {        
             nbTests = nbTests + new Integer(args[0]);
             nbErreurs = nbErreurs + new Integer(args[1]);       
