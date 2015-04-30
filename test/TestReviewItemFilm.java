@@ -132,7 +132,7 @@ public class TestReviewItemFilm {
 		try{
 		sn.addMember("Paul", "paul", "Disneyland aussi a eu quelques difficultés à ses débuts !");
 		sn.addMember("Antoine", "antoine", "Que la Force soit avec toi.");
-		sn.addMember("Paul", "paul", "Quitte à voyager dans le temps au volant d'une voiture, autant en choisir une qui ait de la gueule !");
+		sn.addMember("Alice", "alice", "Quitte à voyager dans le temps au volant d'une voiture, autant en choisir une qui ait de la gueule !");
 
 		sn.addItemFilm ("Paul", "paul", "Jurassic Park", "a", "a", "a", 1);
 		sn.addItemFilm ("Antoine", "antoine", "Star Wars", "a", "a", "a", 1);

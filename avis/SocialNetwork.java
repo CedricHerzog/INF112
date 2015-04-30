@@ -10,6 +10,7 @@ import exception.ItemBookAlreadyExists;
 import exception.MemberAlreadyExists;
 import exception.NotItem;
 import exception.NotMember;
+import java.util.Collection;
 
 /** 
  * @author A. Beugnard, 
@@ -244,6 +245,84 @@ public class SocialNetwork {
 	 */
 	public String toString() {
 		return "";
+	}
+
+
+	/** 
+	 * @uml.property name="member"
+	 * @uml.associationEnd multiplicity="(0 -1)" inverse="socialNetwork:avis.Member"
+	 */
+	private Collection member;
+
+
+	/** 
+	 * Getter of the property <tt>member</tt>
+	 * @return  Returns the member.
+	 * @uml.property  name="member"
+	 */
+	public Collection getMember() {
+		return member;
+	}
+
+	/** 
+	 * Setter of the property <tt>member</tt>
+	 * @param member  The member to set.
+	 * @uml.property  name="member"
+	 */
+	public void setMember(Collection member) {
+		this.member = member;
+	}
+
+
+	/** 
+	 * @uml.property name="film"
+	 * @uml.associationEnd multiplicity="(0 -1)" inverse="socialNetwork:avis.Film"
+	 */
+	private Collection film;
+
+
+	/** 
+	 * Getter of the property <tt>film</tt>
+	 * @return  Returns the film.
+	 * @uml.property  name="film"
+	 */
+	public Collection getFilm() {
+		return film;
+	}
+
+	/** 
+	 * Setter of the property <tt>film</tt>
+	 * @param film  The film to set.
+	 * @uml.property  name="film"
+	 */
+	public void setFilm(Collection film) {
+		this.film = film;
+	}
+
+
+	/** 
+	 * @uml.property name="book"
+	 * @uml.associationEnd multiplicity="(0 -1)" inverse="socialNetwork:avis.Book"
+	 */
+	private Collection book;
+
+
+	/** 
+	 * Getter of the property <tt>book</tt>
+	 * @return  Returns the book.
+	 * @uml.property  name="book"
+	 */
+	public Collection getBook() {
+		return book;
+	}
+
+	/** 
+	 * Setter of the property <tt>book</tt>
+	 * @param book  The book to set.
+	 * @uml.property  name="book"
+	 */
+	public void setBook(Collection book) {
+		this.book = book;
 	}
 
 
