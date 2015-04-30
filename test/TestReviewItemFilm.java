@@ -134,9 +134,9 @@ public class TestReviewItemFilm {
 		sn.addMember("Antoine", "antoine", "Que la Force soit avec toi.");
 		sn.addMember("Paul", "paul", "Quitte à voyager dans le temps au volant d'une voiture, autant en choisir une qui ait de la gueule !");
 
-		sn.addItemFilm ("Paul", "paul", "Jurassic Park", "", "", "", 1);
-		sn.addItemFilm ("Antoine", "antoine", "Star Wars", "", "", "", 1);
-		sn.addItemFilm ("Alice", "alice", "Back to the Future", "", "", "", 1);
+		sn.addItemFilm ("Paul", "paul", "Jurassic Park", "a", "a", "a", 1);
+		sn.addItemFilm ("Antoine", "antoine", "Star Wars", "a", "a", "a", 1);
+		sn.addItemFilm ("Alice", "alice", "Back to the Future", "a", "a", "a", 1);
 		}
 		catch (Exception e){
 			System.out.println("Paramètres incorrects lors de la création de membres et de films. Voir tests associés. ");

@@ -110,13 +110,13 @@ public class TestsAddMember {
 		// tentative d'ajout de membres avec entrées "incorrectes"
 
 		nbTests++;
-		nbErreurs += addMemberBadEntryTest ( sn, null, "qsdfgh", "", "1.1", "L'ajout d'un membre dont le pseudo n'est pas instancié est accepté");
+		nbErreurs += addMemberBadEntryTest ( sn, null, "qsdfgh", "a", "1.1", "L'ajout d'un membre dont le pseudo n'est pas instancié est accepté");
 		nbTests++;
-		nbErreurs += addMemberBadEntryTest ( sn, " ", "qsdfgh", "", "1.2", "L'ajout d'un membre dont le pseudo ne contient pas un caracteres, autre que des espaces, est accepté");
+		nbErreurs += addMemberBadEntryTest ( sn, " ", "qsdfgh", "a", "1.2", "L'ajout d'un membre dont le pseudo ne contient pas un caracteres, autre que des espaces, est accepté");
 		nbTests++;
-		nbErreurs += addMemberBadEntryTest ( sn, "B", null, "", "1.3", "L'ajout d'un membre dont le password n'est pas instancié est accepté");
+		nbErreurs += addMemberBadEntryTest ( sn, "B", null, "a", "1.3", "L'ajout d'un membre dont le password n'est pas instancié est accepté");
 		nbTests++;
-		nbErreurs += addMemberBadEntryTest ( sn, "B", "   qwd ", "", "1.4", "L'ajout d'un membre dont le password ne contient pas au moins 4 caracteres, autre que des espaces de début ou de fin, est accepté");
+		nbErreurs += addMemberBadEntryTest ( sn, "B", "   qwd ", "a", "1.4", "L'ajout d'un membre dont le password ne contient pas au moins 4 caracteres, autre que des espaces de début ou de fin, est accepté");
 		nbTests++;
 		nbErreurs += addMemberBadEntryTest ( sn, "BBBB", "bbbb", null, "1.5", "L'ajout d'un membre dont le profil n'est pas instancié est accepté");
 
@@ -136,13 +136,13 @@ public class TestsAddMember {
 		// tentative d'ajout de membre "existant"
 
 		nbTests++;
-		nbErreurs += addMemberAlreadyExistsTest(sn, new String("Paul"), "abcdefghij", "", "2.2", "L'ajout d'un membre avec le pseudo du premier membre ajouté est accepté");
+		nbErreurs += addMemberAlreadyExistsTest(sn, new String("Paul"), "abcdefghij", "a", "2.2", "L'ajout d'un membre avec le pseudo du premier membre ajouté est accepté");
 		nbTests++;
-		nbErreurs += addMemberAlreadyExistsTest(sn, new String("Alice"), "abcdefghij", "", "2.3", "L'ajout d'un membre avec le pseudo du dernier membre ajouté est accepté");
+		nbErreurs += addMemberAlreadyExistsTest(sn, new String("Alice"), "abcdefghij", "a", "2.3", "L'ajout d'un membre avec le pseudo du dernier membre ajouté est accepté");
 		nbTests++;
-		nbErreurs += addMemberAlreadyExistsTest(sn, new String("anToine"), "abcdefghij", "", "2.4", "L'ajout d'un membre avec un pseudo existant (avec casse différente) est accepté");
+		nbErreurs += addMemberAlreadyExistsTest(sn, new String("anToine"), "abcdefghij", "a", "2.4", "L'ajout d'un membre avec un pseudo existant (avec casse différente) est accepté");
 		nbTests++;
-		nbErreurs += addMemberAlreadyExistsTest(sn, new String(" Antoine "), "abcdefghij", "", "2.5", "L'ajout d'un membre avec un pseudo existant (avec leading et trailing blanks) est accepté");		
+		nbErreurs += addMemberAlreadyExistsTest(sn, new String(" Antoine "), "abcdefghij", "a", "2.5", "L'ajout d'un membre avec un pseudo existant (avec leading et trailing blanks) est accepté");		
 
 
 		nbTests++;
