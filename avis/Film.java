@@ -1,15 +1,50 @@
 package avis;
 
-import java.util.Collection;
+import java.util.LinkedList;
 
 
 public class Film extends Item {
 
 	/** 
+	 * @uml.property name="review"
+	 * @uml.associationEnd multiplicity="(0 -1)" inverse="film:avis.Review"
+	 */
+	private LinkedList<Review> review = new LinkedList<Review>();
+	/**
+	 * @uml.property  name="titre"
+	 */
+	private String titre;
+	/**
+	 * @uml.property  name="genre"
+	 */
+	private String genre;
+	/**
+	 * @uml.property  name="realisateur"
+	 */
+	private String realisateur;
+	/**
+	 * @uml.property  name="scenariste"
+	 */
+	private String scenariste;
+	/**
+	 * @uml.property  name="duree"
+	 */
+	private int duree;
+	/** 
 	 * @uml.property name="socialNetwork"
-	 * @uml.associationEnd multiplicity="(1 1)" inverse="film:avis.SocialNetwork"
+	 * @uml.associationEnd multiplicity="(1 1)" inverse="films:avis.SocialNetwork"
 	 */
 	private SocialNetwork socialNetwork = new avis.SocialNetwork();
+
+	/**
+	 */
+	public Film(String titre, String genre, String realisateur, String scenariste, int duree){
+		this.titre=titre;
+		this.genre=genre;
+		this.realisateur=realisateur;
+		this.scenariste=scenariste;
+		this.duree=duree;		
+	}
 
 	/** 
 	 * Getter of the property <tt>socialNetwork</tt>
@@ -28,37 +63,6 @@ public class Film extends Item {
 	public void setSocialNetwork(SocialNetwork socialNetwork) {
 		this.socialNetwork = socialNetwork;
 	}
-
-	/** 
-	 * @uml.property name="reviewFilm"
-	 * @uml.associationEnd multiplicity="(0 -1)" inverse="film:avis.ReviewFilm"
-	 */
-	private Collection reviewFilm;
-
-	/** 
-	 * Getter of the property <tt>reviewFilm</tt>
-	 * @return  Returns the reviewFilm.
-	 * @uml.property  name="reviewFilm"
-	 */
-	public Collection getReviewFilm() {
-		return reviewFilm;
-	}
-
-	/** 
-	 * Setter of the property <tt>reviewFilm</tt>
-	 * @param reviewFilm  The reviewFilm to set.
-	 * @uml.property  name="reviewFilm"
-	 */
-	public void setReviewFilm(Collection reviewFilm) {
-		this.reviewFilm = reviewFilm;
-	}
-
-
-	/**
-	 * @uml.property  name="genre"
-	 */
-	private String genre;
-
 	/**
 	 * Getter of the property <tt>genre</tt>
 	 * @return  Returns the genre.
@@ -76,11 +80,6 @@ public class Film extends Item {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-
-	/**
-	 * @uml.property  name="realisateur"
-	 */
-	private String realisateur;
 
 	/**
 	 * Getter of the property <tt>realisateur</tt>
@@ -101,11 +100,6 @@ public class Film extends Item {
 	}
 
 	/**
-	 * @uml.property  name="scenariste"
-	 */
-	private String scenariste;
-
-	/**
 	 * Getter of the property <tt>scenariste</tt>
 	 * @return  Returns the scenariste.
 	 * @uml.property  name="scenariste"
@@ -122,11 +116,6 @@ public class Film extends Item {
 	public void setScenariste(String scenariste) {
 		this.scenariste = scenariste;
 	}
-
-	/**
-	 * @uml.property  name="duree"
-	 */
-	private int duree;
 
 	/**
 	 * Getter of the property <tt>duree</tt>
@@ -147,17 +136,11 @@ public class Film extends Item {
 	}
 
 	/** 
-	 * @uml.property name="review"
-	 * @uml.associationEnd multiplicity="(0 -1)" inverse="film:avis.Review"
-	 */
-	private Collection review;
-
-	/** 
 	 * Getter of the property <tt>review</tt>
 	 * @return  Returns the review.
 	 * @uml.property  name="review"
 	 */
-	public Collection getReview() {
+	public LinkedList<Review> getReview() {
 		return review;
 	}
 
@@ -166,7 +149,7 @@ public class Film extends Item {
 	 * @param review  The review to set.
 	 * @uml.property  name="review"
 	 */
-	public void setReview(Collection review) {
+	public void setReview(LinkedList<Review> review) {
 		this.review = review;
 	}
 
@@ -182,10 +165,23 @@ public class Film extends Item {
 			public void checkItem(){
 			}
 
-				
-				/**
-				 */
-				public Film(){
-				}
+
+			/**
+			 * Getter of the property <tt>titre</tt>
+			 * @return  Returns the titre.
+			 * @uml.property  name="titre"
+			 */
+			public String getTitre() {
+				return titre;
+			}
+
+			/**
+			 * Setter of the property <tt>titre</tt>
+			 * @param titre  The titre to set.
+			 * @uml.property  name="titre"
+			 */
+			public void setTitre(String titre) {
+				this.titre = titre;
+			}
 
 }

@@ -7,7 +7,7 @@ public class Book extends Item {
 
 	/** 
 	 * @uml.property name="socialNetwork"
-	 * @uml.associationEnd multiplicity="(1 1)" inverse="book:avis.SocialNetwork"
+	 * @uml.associationEnd multiplicity="(1 1)" inverse="books:avis.SocialNetwork"
 	 */
 	private SocialNetwork socialNetwork = new avis.SocialNetwork();
 
@@ -156,6 +156,29 @@ public class Book extends Item {
 			/**
 			 */
 			public void checkItem(){
+			}
+
+			/**
+			 * @uml.property  name="titre"
+			 */
+			private String titre;
+
+			/**
+			 * Getter of the property <tt>titre</tt>
+			 * @return  Returns the titre.
+			 * @uml.property  name="titre"
+			 */
+			public String getTitre() {
+				return titre;
+			}
+
+			/**
+			 * Setter of the property <tt>titre</tt>
+			 * @param titre  The titre to set.
+			 * @uml.property  name="titre"
+			 */
+			public void setTitre(String titre) {
+				this.titre = titre;
 			}
 
 	

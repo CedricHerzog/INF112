@@ -1,17 +1,42 @@
 package avis;
 
-import java.util.Collection;
+import java.util.LinkedList;
 
 
 
 public class Member extends Visiteur {
-
+	
 	/** 
 	 * @uml.property name="socialNetwork"
-	 * @uml.associationEnd multiplicity="(1 1)" inverse="member:avis.SocialNetwork"
+	 * @uml.associationEnd multiplicity="(1 1)" inverse="members:avis.SocialNetwork"
 	 */
 	private SocialNetwork socialNetwork = new avis.SocialNetwork();
+	/**
+	 * @uml.property  name="review"
+	 * @uml.associationEnd  multiplicity="(0 -1)" inverse="member:avis.Review"
+	 */
+	private LinkedList<Review> review = new LinkedList<Review>();
+	/**
+	 * @uml.property  name="pseudo"
+	 */
+	private String pseudo;
+	/**
+	 * @uml.property  name="password"
+	 */
+	private String password;
+	/**
+	 * @uml.property  name="profil"
+	 */
+	private String profil;
 
+	/**
+	 */
+	public Member(String pseudo, String password, String profil){
+		this.pseudo=pseudo;
+		this.password=password;
+		this.profil=profil;
+	}
+	
 	/** 
 	 * Getter of the property <tt>socialNetwork</tt>
 	 * @return  Returns the socialNetwork.
@@ -31,17 +56,11 @@ public class Member extends Visiteur {
 	}
 
 	/**
-	 * @uml.property  name="review"
-	 * @uml.associationEnd  multiplicity="(0 -1)" inverse="member:avis.Review"
-	 */
-	private Collection review;
-
-	/**
 	 * Getter of the property <tt>review</tt>
 	 * @return  Returns the review.
 	 * @uml.property  name="review"
 	 */
-	public Collection getReview() {
+	public LinkedList<Review> getReview() {
 		return review;
 	}
 
@@ -50,14 +69,9 @@ public class Member extends Visiteur {
 	 * @param review  The review to set.
 	 * @uml.property  name="review"
 	 */
-	public void setReview(Collection review) {
+	public void setReview(LinkedList<Review> review) {
 		this.review = review;
 	}
-
-	/**
-	 * @uml.property  name="pseudo"
-	 */
-	private String pseudo;
 
 	/**
 	 * Getter of the property <tt>pseudo</tt>
@@ -65,7 +79,7 @@ public class Member extends Visiteur {
 	 * @uml.property  name="pseudo"
 	 */
 	public String getPseudo() {
-		return pseudo;
+		return this.pseudo;
 	}
 
 	/**
@@ -76,11 +90,6 @@ public class Member extends Visiteur {
 	public void setPseudo(String pseudo) {
 		this.pseudo = pseudo;
 	}
-
-	/**
-	 * @uml.property  name="password"
-	 */
-	private String password;
 
 	/**
 	 * Getter of the property <tt>password</tt>
@@ -99,11 +108,6 @@ public class Member extends Visiteur {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
-	/**
-	 * @uml.property  name="profil"
-	 */
-	private String profil;
 
 	/**
 	 * Getter of the property <tt>profil</tt>
@@ -130,9 +134,6 @@ public class Member extends Visiteur {
 		}
 
 			
-			/**
-			 */
-			public Member(){
-			}
+			
 
 }

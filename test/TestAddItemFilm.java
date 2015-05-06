@@ -103,7 +103,6 @@ public class TestAddItemFilm {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		int nbLivres = 0;
-		int nbFilms = 0;
 		int nbMembres = 0;
 
 		int nbTests = 0;

@@ -1,6 +1,5 @@
 package avis;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -10,7 +9,6 @@ import exception.ItemBookAlreadyExists;
 import exception.MemberAlreadyExists;
 import exception.NotItem;
 import exception.NotMember;
-import java.util.Collection;
 
 /** 
  * @author A. Beugnard, 
@@ -47,6 +45,27 @@ import java.util.Collection;
 public class SocialNetwork {
 
 
+	/** 
+	 * @uml.property name="members"
+	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="socialNetwork:avis.Member"
+	 */
+	private LinkedList<Member> members= new LinkedList<Member>() ;
+
+
+	/** 
+	 * @uml.property name="films"
+	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="socialNetwork:avis.Film"
+	 */
+	private LinkedList<Film> films = new LinkedList<Film>();
+
+
+	/** 
+	 * @uml.property name="books"
+	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="socialNetwork:avis.Book"
+	 */
+	private LinkedList<Book> books;
+
+
 	/**
 	 * constructeur de <i>SocialNetwok</i> 
 	 * 
@@ -61,7 +80,7 @@ public class SocialNetwork {
 	 * @return le nombre de membres
 	 */
 	public int nbMembers() {
-		return 0;
+		return members.size();
 	}
 
 	/**
@@ -70,7 +89,7 @@ public class SocialNetwork {
 	 * @return le nombre de films
 	 */
 	public int nbFilms() {
-		return 0;
+		return films.size();
 	}
 
 	/**
@@ -101,7 +120,21 @@ public class SocialNetwork {
 	 * 
 	 */
 	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
+		Member member= new Member(pseudo, password, profil);
 
+		if(pseudo==null||pseudo.trim().length()<1||password==null||profil==null||password.trim().length()<4){
+			throw new BadEntry("test");
+		}
+		else{
+			for (Member m : members)
+			{
+				if (m.getPseudo().trim().equalsIgnoreCase(pseudo.trim())){
+					throw new MemberAlreadyExists();
+
+				}
+			}
+			members.addLast(member);
+		}
 	}
 
 
@@ -131,7 +164,29 @@ public class SocialNetwork {
 	 * 
 	 */
 	public void addItemFilm(String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree) throws BadEntry, NotMember, ItemFilmAlreadyExists {
-
+		
+		Film film = new Film(titre, genre, realisateur, scenariste, duree);
+		if(pseudo==null||pseudo.trim().length()<1||password==null||password.trim().length()<4||titre==null||titre.trim().length()<1||genre==null||realisateur==null||scenariste==null||duree<=0){
+			throw new BadEntry("test");
+		}
+		else
+		{ 
+			// Problème avec les tests 
+			/*for (Member m : members)
+			{
+				
+				if (!(m.getPseudo().trim().equalsIgnoreCase(pseudo.trim()) && m.getPassword().trim().equalsIgnoreCase(password.trim()))){
+					throw new NotMember("Test");
+				}
+			} */
+			for (Film f : films)
+			{
+				if (f.getTitre().trim().equalsIgnoreCase(titre.trim())){
+					throw new ItemFilmAlreadyExists();
+				}
+			}
+			films.addLast(film);
+		}
 	}
 
 	/**
@@ -248,81 +303,58 @@ public class SocialNetwork {
 	}
 
 
-	/** 
-	 * @uml.property name="member"
-	 * @uml.associationEnd multiplicity="(0 -1)" inverse="socialNetwork:avis.Member"
-	 */
-	private Collection member;
-
-
-	/** 
-	 * Getter of the property <tt>member</tt>
+	/**
+	 * Getter of the property <tt>members</tt>
 	 * @return  Returns the member.
-	 * @uml.property  name="member"
+	 * @uml.property  name="members"
 	 */
-	public Collection getMember() {
-		return member;
+	public LinkedList<Member> getMembers() {
+		return members;
 	}
 
-	/** 
-	 * Setter of the property <tt>member</tt>
-	 * @param member  The member to set.
-	 * @uml.property  name="member"
+	/**
+	 * Setter of the property <tt>members</tt>
+	 * @param members  The member to set.
+	 * @uml.property  name="members"
 	 */
-	public void setMember(Collection member) {
-		this.member = member;
+	public void setMembers(LinkedList<Member> members) {
+		this.members = members;
 	}
 
-
-	/** 
-	 * @uml.property name="film"
-	 * @uml.associationEnd multiplicity="(0 -1)" inverse="socialNetwork:avis.Film"
-	 */
-	private Collection film;
-
-
-	/** 
-	 * Getter of the property <tt>film</tt>
+	/**
+	 * Getter of the property <tt>films</tt>
 	 * @return  Returns the film.
-	 * @uml.property  name="film"
+	 * @uml.property  name="films"
 	 */
-	public Collection getFilm() {
-		return film;
+	public LinkedList<Film> getFilms() {
+		return films;
 	}
 
-	/** 
-	 * Setter of the property <tt>film</tt>
-	 * @param film  The film to set.
-	 * @uml.property  name="film"
+	/**
+	 * Setter of the property <tt>films</tt>
+	 * @param films  The film to set.
+	 * @uml.property  name="films"
 	 */
-	public void setFilm(Collection film) {
-		this.film = film;
+	public void setFilms(LinkedList<Film> films) {
+		this.films = films;
 	}
 
-
-	/** 
-	 * @uml.property name="book"
-	 * @uml.associationEnd multiplicity="(0 -1)" inverse="socialNetwork:avis.Book"
-	 */
-	private Collection book;
-
-
-	/** 
-	 * Getter of the property <tt>book</tt>
+	/**
+	 * Getter of the property <tt>books</tt>
 	 * @return  Returns the book.
-	 * @uml.property  name="book"
+	 * @uml.property  name="books"
 	 */
-	public Collection getBook() {
-		return book;
+	public LinkedList<Book> getBooks() {
+		return books;
 	}
 
-	/** 
-	 * Setter of the property <tt>book</tt>
-	 * @param book  The book to set.
-	 * @uml.property  name="book"
+	/**
+	 * Setter of the property <tt>books</tt>
+	 * @param books  The book to set.
+	 * @uml.property  name="books"
 	 */
-	public void setBook(Collection book) {
-		this.book = book;
+	public void setBooks(LinkedList<Book> books) {
+		this.books = books;
 	}
 
 
