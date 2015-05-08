@@ -45,6 +45,10 @@ public class Film extends Item {
 		this.scenariste=scenariste;
 		this.duree=duree;		
 	}
+	
+	public Film(){
+		
+	}
 
 	/** 
 	 * Getter of the property <tt>socialNetwork</tt>

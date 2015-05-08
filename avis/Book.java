@@ -1,6 +1,6 @@
 package avis;
 
-import java.util.Collection;
+import java.util.LinkedList;
 
 
 public class Book extends Item {
@@ -10,6 +10,28 @@ public class Book extends Item {
 	 * @uml.associationEnd multiplicity="(1 1)" inverse="books:avis.SocialNetwork"
 	 */
 	private SocialNetwork socialNetwork = new avis.SocialNetwork();
+
+	/**
+	 * @uml.property  name="genre"
+	 */
+	private String genre;
+	/**
+	 * @uml.property  name="auteur"
+	 */
+	private String auteur;
+	/**
+	 * @uml.property  name="nbPages"
+	 */
+	private int nbPages;
+	/**
+	 * @uml.property  name="review"
+	 * @uml.associationEnd  multiplicity="(0 -1)" inverse="book:avis.Review"
+	 */
+	private LinkedList<Review> review=new LinkedList<Review>();
+	/**
+	 * @uml.property  name="titre"
+	 */
+	private String titre;
 
 	/** 
 	 * Getter of the property <tt>socialNetwork</tt>
@@ -30,35 +52,6 @@ public class Book extends Item {
 	}
 
 	/**
-	 * @uml.property  name="reviewBook"
-	 * @uml.associationEnd  multiplicity="(0 -1)" inverse="book:avis.ReviewBook"
-	 */
-	private Collection reviewBook;
-
-	/**
-	 * Getter of the property <tt>reviewBook</tt>
-	 * @return  Returns the reviewBook.
-	 * @uml.property  name="reviewBook"
-	 */
-	public Collection getReviewBook() {
-		return reviewBook;
-	}
-
-	/**
-	 * Setter of the property <tt>reviewBook</tt>
-	 * @param reviewBook  The reviewBook to set.
-	 * @uml.property  name="reviewBook"
-	 */
-	public void setReviewBook(Collection reviewBook) {
-		this.reviewBook = reviewBook;
-	}
-
-	/**
-	 * @uml.property  name="genre"
-	 */
-	private String genre;
-
-	/**
 	 * Getter of the property <tt>genre</tt>
 	 * @return  Returns the genre.
 	 * @uml.property  name="genre"
@@ -75,11 +68,6 @@ public class Book extends Item {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-
-	/**
-	 * @uml.property  name="auteur"
-	 */
-	private String auteur;
 
 	/**
 	 * Getter of the property <tt>auteur</tt>
@@ -100,11 +88,6 @@ public class Book extends Item {
 	}
 
 	/**
-	 * @uml.property  name="nbPages"
-	 */
-	private int nbPages;
-
-	/**
 	 * Getter of the property <tt>nbPages</tt>
 	 * @return  Returns the nbPages.
 	 * @uml.property  name="nbPages"
@@ -123,17 +106,11 @@ public class Book extends Item {
 	}
 
 	/**
-	 * @uml.property  name="review"
-	 * @uml.associationEnd  multiplicity="(0 -1)" inverse="book:avis.Review"
-	 */
-	private Collection review;
-
-	/**
 	 * Getter of the property <tt>review</tt>
 	 * @return  Returns the review.
 	 * @uml.property  name="review"
 	 */
-	public Collection getReview() {
+	public LinkedList<Review> getReview() {
 		return review;
 	}
 
@@ -142,7 +119,7 @@ public class Book extends Item {
 	 * @param review  The review to set.
 	 * @uml.property  name="review"
 	 */
-	public void setReview(Collection review) {
+	public void setReview(LinkedList<Review> review) {
 		this.review = review;
 	}
 
@@ -157,11 +134,6 @@ public class Book extends Item {
 			 */
 			public void checkItem(){
 			}
-
-			/**
-			 * @uml.property  name="titre"
-			 */
-			private String titre;
 
 			/**
 			 * Getter of the property <tt>titre</tt>

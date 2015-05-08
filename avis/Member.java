@@ -37,6 +37,10 @@ public class Member extends Visiteur {
 		this.profil=profil;
 	}
 	
+	public Member(){
+		
+	}
+	
 	/** 
 	 * Getter of the property <tt>socialNetwork</tt>
 	 * @return  Returns the socialNetwork.
