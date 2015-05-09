@@ -29,7 +29,7 @@ public abstract class Item {
 		
 		/**
 		 */
-		public abstract void addReview();
+		public abstract void addReview(Review review);
 
 			
 			/**

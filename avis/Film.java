@@ -160,7 +160,8 @@ public class Film extends Item {
 		
 		/**
 		 */
-		public void addReview(){
+		public void addReview(Review review){
+			this.review.addLast(review);
 		}
 
 			

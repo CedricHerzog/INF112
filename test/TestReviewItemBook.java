@@ -11,7 +11,7 @@ import avis.SocialNetwork;
  * @version V1.0
  */
 
-public class TestReviewItemFilm {
+public class TestReviewItemBook {
 	
 		/**
 		*											Test fonction reviewItemFilm :

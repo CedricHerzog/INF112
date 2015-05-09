@@ -32,6 +32,17 @@ public class Book extends Item {
 	 * @uml.property  name="titre"
 	 */
 	private String titre;
+	
+	public Book(String titre, String genre, String auteur, int nbPages){
+		this.titre=titre;
+		this.genre=genre;
+		this.auteur=auteur;
+		this.nbPages=nbPages;
+	}
+	
+	public Book(){
+		
+	}
 
 	/** 
 	 * Getter of the property <tt>socialNetwork</tt>
@@ -126,7 +137,7 @@ public class Book extends Item {
 		
 		/**
 		 */
-		public void addReview(){
+		public void addReview(Review review){
 		}
 
 			

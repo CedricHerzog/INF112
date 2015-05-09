@@ -10,6 +10,37 @@ public class Review {
 	private Member member = new avis.Member();
 
 	/**
+	 * @uml.property  name="note"
+	 */
+	private float note;
+	/**
+	 * @uml.property  name="commentaire"
+	 */
+	private String commentaire;
+	/**
+	 * @uml.property  name="titre"
+	 */
+	private String titre;
+	/** 
+	 * @uml.property name="film"
+	 * @uml.associationEnd multiplicity="(1 1)" inverse="review:avis.Film"
+	 */
+	private Film film = new avis.Film();
+	/**
+	 * @uml.property  name="book"
+	 * @uml.associationEnd  multiplicity="(1 1)" inverse="review:avis.Book"
+	 */
+	private Book book = new avis.Book();
+	
+	public Review(String titre, float note, String commentaire, Member member){
+		this.titre=titre;
+		this.note=note;
+		this.commentaire=commentaire;
+		this.member=member;
+	}
+	
+
+	/**
 	 * Getter of the property <tt>member</tt>
 	 * @return  Returns the member.
 	 * @uml.property  name="member"
@@ -26,11 +57,6 @@ public class Review {
 	public void setMember(Member member) {
 		this.member = member;
 	}
-
-	/**
-	 * @uml.property  name="note"
-	 */
-	private float note;
 
 	/**
 	 * Getter of the property <tt>note</tt>
@@ -51,11 +77,6 @@ public class Review {
 	}
 
 	/**
-	 * @uml.property  name="commentaire"
-	 */
-	private String commentaire;
-
-	/**
 	 * Getter of the property <tt>commentaire</tt>
 	 * @return  Returns the commentaire.
 	 * @uml.property  name="commentaire"
@@ -72,11 +93,6 @@ public class Review {
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
 	}
-
-	/**
-	 * @uml.property  name="titre"
-	 */
-	private String titre;
 
 	/**
 	 * Getter of the property <tt>titre</tt>
@@ -97,12 +113,6 @@ public class Review {
 	}
 
 	/** 
-	 * @uml.property name="film"
-	 * @uml.associationEnd multiplicity="(1 1)" inverse="review:avis.Film"
-	 */
-	private Film film = new avis.Film();
-
-	/** 
 	 * Getter of the property <tt>film</tt>
 	 * @return  Returns the film.
 	 * @uml.property  name="film"
@@ -119,12 +129,6 @@ public class Review {
 	public void setFilm(Film film) {
 		this.film = film;
 	}
-
-	/**
-	 * @uml.property  name="book"
-	 * @uml.associationEnd  multiplicity="(1 1)" inverse="review:avis.Book"
-	 */
-	private Book book = new avis.Book();
 
 	/**
 	 * Getter of the property <tt>book</tt>

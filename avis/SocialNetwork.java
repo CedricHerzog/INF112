@@ -63,7 +63,7 @@ public class SocialNetwork {
 	 * @uml.property name="books"
 	 * @uml.associationEnd multiplicity="(0 -1)" ordering="true" inverse="socialNetwork:avis.Book"
 	 */
-	private LinkedList<Book> books;
+	private LinkedList<Book> books = new LinkedList<Book>();
 
 
 	/**
@@ -98,7 +98,7 @@ public class SocialNetwork {
 	 * @return le nombre de livres
 	 */
 	public int nbBooks() {
-		return 0;
+		return books.size();
 	}
 
 
@@ -122,7 +122,7 @@ public class SocialNetwork {
 	public void addMember(String pseudo, String password, String profil) throws BadEntry, MemberAlreadyExists  {
 		//On istancie un nouveau membre
 		Member member= new Member(pseudo, password, profil);
-		
+
 		//On test toutes les possibilités du BadEntry
 		if(pseudo==null||pseudo.trim().length()<1||password==null||profil==null||password.trim().length()<4){
 			//On renvoi le BadEntry si nécessaire
@@ -170,10 +170,10 @@ public class SocialNetwork {
 	 * 
 	 */
 	public void addItemFilm(String pseudo, String password, String titre, String genre, String realisateur, String scenariste, int duree) throws BadEntry, NotMember, ItemFilmAlreadyExists {
-		
+
 		//Instanciation d'un film avec les paramètre passés en argument.
 		Film film = new Film(titre, genre, realisateur, scenariste, duree);
-		
+
 		//On test toutes les possibilités d'un BadEntry afin de renvoyer l'exception lors d'un mauvaise saisie des arguments
 		if(pseudo==null||pseudo.trim().length()<1||password==null||password.trim().length()<4||titre==null||titre.trim().length()<1||genre==null||realisateur==null||scenariste==null||duree<=0){
 			throw new BadEntry("test");
@@ -195,7 +195,7 @@ public class SocialNetwork {
 			if(state!=1){
 				throw new NotMember("Test");
 			}
-			
+
 			//On parcourt les films à la recherche d'une correspondance
 			for (Film f : films)
 			{
@@ -204,7 +204,7 @@ public class SocialNetwork {
 					throw new ItemFilmAlreadyExists();
 				}
 			}
-			
+
 			//Si tous les test sont passés, on ajoute le film à la liste du SN
 			films.addLast(film);
 		}
@@ -236,6 +236,43 @@ public class SocialNetwork {
 	 */
 	public void addItemBook(String pseudo, String password, String titre, String genre, String auteur, int nbPages) throws  BadEntry, NotMember, ItemBookAlreadyExists{
 
+		//Instanciation d'un film avec les paramètre passés en argument.
+		Book book = new Book(titre, genre, auteur, nbPages);
+
+		//On test toutes les possibilités d'un BadEntry afin de renvoyer l'exception lors d'un mauvaise saisie des arguments
+		if(pseudo==null||pseudo.trim().length()<1||password==null||password.trim().length()<4||titre==null||titre.trim().length()<1||genre==null||auteur==null||nbPages<=0){
+			throw new BadEntry("test");
+		}
+		//Si il n'y a pas de problème de saisie, on test si le membre existe
+		else
+		{ 
+			//Initialisation d'une variable "state" utilisée pour le test des IDs 
+			int state=0;
+			//On parcourt le tableau de membres de SocialNetwork à la recherche d'un membre correspondant.
+			for (Member m : members)
+			{
+				//Si on trouve une correspondance, on passe la variable "state" à 1.
+				if ((m.getPseudo().trim().equalsIgnoreCase(pseudo.trim()) && m.getPassword().trim().equalsIgnoreCase(password.trim()))){
+					state=1;
+				}
+			}
+			//Si on ne trouve pas de correspondance, on renvoi une exception NotMember
+			if(state!=1){
+				throw new NotMember("Test");
+			}
+
+			//On parcourt les films à la recherche d'une correspondance
+			for (Book b : books)
+			{
+				//Si il y a correspondance, on renvoi une exception ItemFilmAlreadyExists
+				if (b.getTitre().trim().equalsIgnoreCase(titre.trim())){
+					throw new ItemBookAlreadyExists();
+				}
+			}
+
+			//Si tous les test sont passés, on ajoute le film à la liste du SN
+			books.addLast(book);
+		}
 	}
 
 	/**
@@ -280,7 +317,77 @@ public class SocialNetwork {
 	 * @return la note moyenne des notes sur ce film  
 	 */
 	public float reviewItemFilm(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
-		return 0.0f;
+
+		//On test toutes les possibilités du BadEntry
+		if(pseudo==null||pseudo.trim().length()<1||password==null||password.trim().length()<4||titre==null||titre.trim().length()<1||note<0||note>5||commentaire==null){
+			//On renvoi le BadEntry si nécessaire
+			throw new BadEntry("test");
+		}
+
+		int state=0;
+		for(Member member : members){
+			if(member.getPseudo().trim().equalsIgnoreCase(pseudo.trim())&& member.getPassword().trim().equals(password.trim())){
+				state=1;
+			}
+		}
+		if(state!=1){
+			throw new NotMember("Test");
+		}
+
+		state=0;
+		for(Film film : films){
+			if(film.getTitre().trim().equalsIgnoreCase(titre.trim())){
+				state=1;
+			}
+		}
+		if(state!=1){
+			throw new NotItem("Test");
+		}
+		/*--------------------------------------------------------------------------------------------------------------*/
+		Review review;
+		float moyenne=0;
+		int nbOccurence=0;
+
+		for(Member member : members){
+			if(member.getPseudo().trim().equalsIgnoreCase(pseudo.trim())){
+				review = new Review(titre,note,commentaire,member);	
+
+
+				for(Film film : films){
+					if(film.getTitre().trim().equalsIgnoreCase(titre.trim())){
+
+						if(!film.getReview().isEmpty()){
+
+
+
+
+							for(Review reviewElement : film.getReview()){
+								if(reviewElement.getMember().getPseudo().trim().equalsIgnoreCase(pseudo.trim())){
+									film.getReview().remove(reviewElement);
+								}
+								
+							}
+							
+							
+							film.addReview(review);
+							
+							
+						}
+						else{
+							film.addReview(review);
+						}
+						for(Review reviewElement : film.getReview()){
+							nbOccurence++;
+							moyenne=((moyenne*(nbOccurence-1))+reviewElement.getNote())/nbOccurence;
+						}
+
+					}
+				}
+
+			}
+		}
+
+		return moyenne;
 	}
 
 
