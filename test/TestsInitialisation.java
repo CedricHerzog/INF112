@@ -1,14 +1,6 @@
 package test;
 
-import java.util.LinkedList;
-
 import avis.SocialNetwork;
-import exception.BadEntry;
-import exception.ItemFilmAlreadyExists;
-import exception.ItemBookAlreadyExists;
-import exception.MemberAlreadyExists;
-import exception.NotItem;
-import exception.NotMember;
 
 /** 
  * @author B. Prou
@@ -21,10 +13,6 @@ public class TestsInitialisation {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
-		int nbMembres = 0;
-		int nbLivres = 0;
-		int nbFilms = 0;
 
 		int nbTests = 0;
 		int nbErreurs = 0;

@@ -32,16 +32,37 @@ public class Book extends Item {
 	 * @uml.property  name="titre"
 	 */
 	private String titre;
-	
+
 	public Book(String titre, String genre, String auteur, int nbPages){
 		this.titre=titre;
 		this.genre=genre;
 		this.auteur=auteur;
 		this.nbPages=nbPages;
 	}
-	
+
 	public Book(){
-		
+
+	}
+	public String toString(){
+		int nbOccurence=0;
+		float moyenne = 0;
+		for(Review reviewElement : review){
+			nbOccurence++;
+			moyenne=((moyenne*(nbOccurence-1))+reviewElement.getNote())/nbOccurence;
+		}
+		String retour = "Livre: " + titre + " Note: " + moyenne +" ("+ nbOccurence+" review(s) )";
+		return retour;
+	}
+
+	/**
+	 */
+	public void addReview(Review review){
+		this.review.addLast(review);
+	}
+
+	/**
+	 */
+	public void checkItem(){
 	}
 
 	/** 
@@ -134,36 +155,25 @@ public class Book extends Item {
 		this.review = review;
 	}
 
-		
-		/**
-		 */
-		public void addReview(Review review){
-		}
 
-			
-			/**
-			 */
-			public void checkItem(){
-			}
+	/**
+	 * Getter of the property <tt>titre</tt>
+	 * @return  Returns the titre.
+	 * @uml.property  name="titre"
+	 */
+	public String getTitre() {
+		return titre;
+	}
 
-			/**
-			 * Getter of the property <tt>titre</tt>
-			 * @return  Returns the titre.
-			 * @uml.property  name="titre"
-			 */
-			public String getTitre() {
-				return titre;
-			}
+	/**
+	 * Setter of the property <tt>titre</tt>
+	 * @param titre  The titre to set.
+	 * @uml.property  name="titre"
+	 */
+	public void setTitre(String titre) {
+		this.titre = titre;
+	}
 
-			/**
-			 * Setter of the property <tt>titre</tt>
-			 * @param titre  The titre to set.
-			 * @uml.property  name="titre"
-			 */
-			public void setTitre(String titre) {
-				this.titre = titre;
-			}
 
-	
 
 }

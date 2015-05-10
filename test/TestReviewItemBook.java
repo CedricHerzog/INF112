@@ -14,17 +14,17 @@ import avis.SocialNetwork;
 public class TestReviewItemBook {
 	
 		/**
-		*											Test fonction reviewItemFilm :
+		*											Test fonction reviewItemBook :
 		*
-		* Les différentes méthodes vérifient que la review d'un film (pseudo, pwd, profil) est refusée (levée de l'exception BadEntry)
+		* Les différentes méthodes vérifient que la review d'un Book (pseudo, pwd, profil) est refusée (levée de l'exception BadEntry)
 		* Si c'est bien le cas, ne fait rien
 		* Sinon, affiche le message d'erreur passé en paramètre
 		* 
 		* @param sn social network
 		* @param pseudo pseudo du membre émettant l'opinion
 		* @param password son mot de passe
-		* @param titre titre du film  concerné
-		* @param note la note qu'il donne au film 
+		* @param titre titre du Book  concerné
+		* @param note la note qu'il donne au Book 
 		* @param commentaire ses commentaires
 		* @param idTest l'id octroyé au test
 		* @param messErreur le message d'erreur à afficher
@@ -32,10 +32,10 @@ public class TestReviewItemBook {
 		* @return 1 si une anomalie est trouvée, 0 sinon (exception conforme détectée)
 		*/
 	
-	public static int reviewItemFilmBadEntryTest (SocialNetwork sn, String pseudo, String password, String titre, float note, String commentaire, String idTest, String messErreur){
+	public static int reviewItemBookBadEntryTest (SocialNetwork sn, String pseudo, String password, String titre, float note, String commentaire, String idTest, String messErreur){
 	// Test la levée d'exception BadEntry
 		try {
-			sn.reviewItemFilm(pseudo, password, titre, note, commentaire);
+			sn.reviewItemBook(pseudo, password, titre, note, commentaire);
 			System.out.println ("Test " + idTest + " : " + messErreur);
 			// Aucune exception levée, retourne donc 1
 			return 1;
@@ -53,10 +53,10 @@ public class TestReviewItemBook {
 		}
 	}
 	
-	public static int reviewItemFilmNotMemberTest (SocialNetwork sn, String pseudo, String password, String titre, float note, String commentaire, String idTest, String messErreur){
+	public static int reviewItemBookNotMemberTest (SocialNetwork sn, String pseudo, String password, String titre, float note, String commentaire, String idTest, String messErreur){
 	// Test la levée d'exception NotMember
 		try {
-			sn.reviewItemFilm(pseudo, password, titre, note, commentaire);
+			sn.reviewItemBook(pseudo, password, titre, note, commentaire);
 			System.out.println ("Test " + idTest + " : " + messErreur);
 			// Aucune exception levée, retourne donc 1
 			return 1;
@@ -74,10 +74,10 @@ public class TestReviewItemBook {
 		}
 	}
 	
-	public static int reviewItemFilmNotItemTest (SocialNetwork sn, String pseudo, String password, String titre, float note, String commentaire, String idTest, String messErreur){
+	public static int reviewItemBookNotItemTest (SocialNetwork sn, String pseudo, String password, String titre, float note, String commentaire, String idTest, String messErreur){
 		// Test la levée d'exception NotItem
 			try {
-				sn.reviewItemFilm(pseudo, password, titre, note, commentaire);
+				sn.reviewItemBook(pseudo, password, titre, note, commentaire);
 				System.out.println ("Test " + idTest + " : " + messErreur);
 				// Aucune exception levée, retourne donc 1
 				return 1;
@@ -95,14 +95,14 @@ public class TestReviewItemBook {
 			}
 		}
 	
-	public static int reviewItemFilmOKTest (SocialNetwork sn, String pseudo, String password, String titre, float note, String commentaire, String idTest, float moyennedesiree){
+	public static int reviewItemBookOKTest (SocialNetwork sn, String pseudo, String password, String titre, float note, String commentaire, String idTest, float moyennedesiree){
 		// @param  moyenne 
 		float moyenne;
 		try{
-			moyenne=sn.reviewItemFilm (pseudo, password, titre, note, commentaire);
+			moyenne=sn.reviewItemBook (pseudo, password, titre, note, commentaire);
 			if (moyenne!=moyennedesiree )
 			{
-				System.out.println ("Test " + idTest + " : La valeur de la moyenne de l'ItemFilm est différente de celle attendue"+moyennedesiree);
+				System.out.println ("Test " + idTest + " : La valeur de la moyenne de l'ItemBook est différente de celle attendue"+moyennedesiree);
 				// Moyenne différente de celle attendue, retourne donc 1
 				return 1;
 			}
@@ -123,7 +123,7 @@ public class TestReviewItemBook {
 	
 	public static void main(String[] args) {
 		
-		System.out.println("Tests  ajouter review à itemFilms au réseau social  ");
+		System.out.println("Tests  ajouter review à itemBooks au réseau social  ");
 		SocialNetwork sn = new SocialNetwork();
 		int nbTests = 0;
 		int nbErreurs = 0;
@@ -134,17 +134,17 @@ public class TestReviewItemBook {
 		sn.addMember("Antoine", "antoine", "Que la Force soit avec toi.");
 		sn.addMember("Alice", "alice", "Quitte à voyager dans le temps au volant d'une voiture, autant en choisir une qui ait de la gueule !");
 
-		sn.addItemFilm ("Paul", "paul", "Jurassic Park", "a", "a", "a", 1);
-		sn.addItemFilm ("Antoine", "antoine", "Star Wars", "a", "a", "a", 1);
-		sn.addItemFilm ("Alice", "alice", "Back to the Future", "a", "a", "a", 1);
+		sn.addItemBook ("Paul", "paul", "Jurassic Park", "a", "a", 1);
+		sn.addItemBook ("Antoine", "antoine", "Star Wars", "a", "a", 1);
+		sn.addItemBook ("Alice", "alice", "Back to the Future", "a", "a", 1);
 		}
 		catch (Exception e){
-			System.out.println("Paramètres incorrects lors de la création de membres et de films. Voir tests associés. ");
+			System.out.println("Paramètres incorrects lors de la création de membres et de Books. Voir tests associés. ");
 			System.exit(1);
 		}
 		
-		int nbFilms = sn.nbFilms();
 		int nbBooks = sn.nbBooks();
+		int nbFilms = sn.nbFilms();
 		int nbMembers = sn.nbMembers();
 
 
@@ -152,78 +152,77 @@ public class TestReviewItemBook {
 
 		// tentative d'ajout de review avec entrées "incorrectes"
 		nbTests++;
-		nbErreurs += reviewItemFilmBadEntryTest ( sn, null, "paul", "Titre", 1, "Bien", "5.01", "L'ajout d'une review avec un pseudo non instancié est accepté");
+		nbErreurs += reviewItemBookBadEntryTest ( sn, null, "paul", "Titre", 1, "Bien", "5.01", "L'ajout d'une review avec un pseudo non instancié est accepté");
 		nbTests++;
-		nbErreurs += reviewItemFilmBadEntryTest ( sn,"     ", "paul", "Titre", 1, "Bien", "5.02", "L'ajout d'une review avec un pseudo qui ne contient que des espaces est accepté");
+		nbErreurs += reviewItemBookBadEntryTest ( sn,"     ", "paul", "Titre", 1, "Bien", "5.02", "L'ajout d'une review avec un pseudo qui ne contient que des espaces est accepté");
 		nbTests++;
-		nbErreurs += reviewItemFilmBadEntryTest ( sn, "Paul", null, "Titre", 1, "Bien", "5.03", "L'ajout d'une review avec un password non instancié est accepté");
+		nbErreurs += reviewItemBookBadEntryTest ( sn, "Paul", null, "Titre", 1, "Bien", "5.03", "L'ajout d'une review avec un password non instancié est accepté");
 		nbTests++;
-		nbErreurs += reviewItemFilmBadEntryTest ( sn,"Paul", "non", "Titre", 1, "Bien", "5.04", "L'ajout d'une review  avec un password de moins de 4 caractères est accepté");
+		nbErreurs += reviewItemBookBadEntryTest ( sn,"Paul", "non", "Titre", 1, "Bien", "5.04", "L'ajout d'une review  avec un password de moins de 4 caractères est accepté");
 		nbTests++;
-		nbErreurs += reviewItemFilmBadEntryTest ( sn, "Paul", "paul", null, 1, "Bien", "5.05", "L'ajout d'une review avec un titre non instancié est accepté");
+		nbErreurs += reviewItemBookBadEntryTest ( sn, "Paul", "paul", null, 1, "Bien", "5.05", "L'ajout d'une review avec un titre non instancié est accepté");
 		nbTests++;
-		nbErreurs += reviewItemFilmBadEntryTest ( sn, "Paul", "paul", "      ", 1, "Bien", "5.06", "L'ajout d'une review avec un titre qui ne contient que des espaces est accepté");
+		nbErreurs += reviewItemBookBadEntryTest ( sn, "Paul", "paul", "      ", 1, "Bien", "5.06", "L'ajout d'une review avec un titre qui ne contient que des espaces est accepté");
 		nbTests++;
-		nbErreurs += reviewItemFilmBadEntryTest ( sn,"Paul", "paul", "Titre", 10, "Bien", "5.07", "L'ajout d'une review avec une note non comprise entre 0 et 5 est accepté");
+		nbErreurs += reviewItemBookBadEntryTest ( sn,"Paul", "paul", "Titre", 10, "Bien", "5.07", "L'ajout d'une review avec une note non comprise entre 0 et 5 est accepté");
 		nbTests++;
-		nbErreurs += reviewItemFilmBadEntryTest ( sn,"Paul", "paul", "Titre", 1, null, "5.08", "L'ajout d'une review avec un commentaire non instancié est accepté");
+		nbErreurs += reviewItemBookBadEntryTest ( sn,"Paul", "paul", "Titre", 1, null, "5.08", "L'ajout d'une review avec un commentaire non instancié est accepté");
 
 
 		// <=> fiche numéro 6
 
 		// tentative d'ajout de review avec entrées "correctes"
 		nbTests++;
-		nbErreurs += reviewItemFilmOKTest ( sn,"Paul", "paul", "Jurassic Park", 5, "Je suis toujours à la recherche d'un plus grand monument du cinéma ", "6.01a", 5);
+		nbErreurs += reviewItemBookOKTest ( sn,"Paul", "paul", "Jurassic Park", 5, "Je suis toujours à la recherche d'un plus grand monument du cinéma ", "6.01a", 5);
 		nbTests++;
-		nbErreurs += reviewItemFilmOKTest ( sn,"Antoine", "antoine", "Star Wars", 4, "Un chef d'oeuvre", "6.01b", 4);
+		nbErreurs += reviewItemBookOKTest ( sn,"Antoine", "antoine", "Star Wars", 4, "Un chef d'oeuvre", "6.01b", 4);
 		nbTests++;
-		nbErreurs += reviewItemFilmOKTest ( sn,"Alice", "alice", "Back to the Future", 5, "J'adore ! Rendez-vous en 2015 pour retrouver les personnages dans le futur.", "6.01c", 5);
+		nbErreurs += reviewItemBookOKTest ( sn,"Alice", "alice", "Back to the Future", 5, "J'adore ! Rendez-vous en 2015 pour retrouver les personnages dans le futur.", "6.01c", 5);
 		
 		// modification de la review par le même membre (nouvelle note donnée 5, moyenne attendue 5)
 		nbTests++;
-		nbErreurs += reviewItemFilmOKTest ( sn,"Antoine", "antoine", "Star Wars", 5, "Un chef d'oeuvre, assurément", "6.02", 5);
+		nbErreurs += reviewItemBookOKTest ( sn,"Antoine", "antoine", "Star Wars", 5, "Un chef d'oeuvre, assurément", "6.02", 5);
 		
 		// ajout d'une seconde review par un autre membre (note donnée 4, moyenne attendue 4.5)
 		nbTests++;
-		nbErreurs += reviewItemFilmOKTest ( sn,"Alice", "alice", "Star Wars", 4, "Bons fims", "6.03", (float) 4.5);
+		nbErreurs += reviewItemBookOKTest ( sn,"Alice", "alice", "Star Wars", 4, "Bons fims", "6.03", (float) 4.5);
 		
 		// modification de la seconde review (nouvelle note donnée 3, moyenne attendue 4)
 		nbTests++;
-		nbErreurs += reviewItemFilmOKTest ( sn,"Alice", "alice", "Star Wars", 3, "Sympa", "6.04", 4);
+		nbErreurs += reviewItemBookOKTest ( sn,"Alice", "alice", "Star Wars", 3, "Sympa", "6.04", 4);
 
-		// ajout d'une review pour un film avec un pseudo ne correspodant à aucun membre
+		// ajout d'une review pour un Book avec un pseudo ne correspodant à aucun membre
 		nbTests++;
-		nbErreurs += reviewItemFilmNotMemberTest ( sn,"Lili", "alice", "Star Wars", 5, "Cool", "6.05", "L'ajout d'une review avec un pseudo qui n'est pas un membre est accepté");
+		nbErreurs += reviewItemBookNotMemberTest ( sn,"Lili", "alice", "Star Wars", 5, "Cool", "6.05", "L'ajout d'une review avec un pseudo qui n'est pas un membre est accepté");
 		
-		// ajout d'une review pour un film avec un mot de passe qui ne correspond pas au pseudo du membre
+		// ajout d'une review pour un Book avec un mot de passe qui ne correspond pas au pseudo du membre
 		nbTests++;
-		nbErreurs += reviewItemFilmNotMemberTest ( sn,"Alice", "lili", "Star Wars", 5, "Bien", "6.06", "L'ajout d'une review avec un password qui ne correspond pas à un membre est accepté");
+		nbErreurs += reviewItemBookNotMemberTest ( sn,"Alice", "lili", "Star Wars", 5, "Bien", "6.06", "L'ajout d'une review avec un password qui ne correspond pas à un membre est accepté");
 		
-		// ajout d'une review sur un film qui n'est pas dans la base. 
+		// ajout d'une review sur un Book qui n'est pas dans la base. 
 		nbTests++;
-		nbErreurs += reviewItemFilmNotItemTest ( sn,"Paul", "paul", "Indiana Jones", 5, "Un classique", "6.07", "L'ajout d'une review avec un film qui n'est pas dans la base est accepté");
+		nbErreurs += reviewItemBookNotItemTest ( sn,"Paul", "paul", "Indiana Jones", 5, "Un classique", "6.07", "L'ajout d'une review avec un Book qui n'est pas dans la base est accepté");
 		
 		nbTests++;
-		if (nbFilms != sn.nbFilms()) {
-			System.out.println("Erreur  :  le nombre de films après utilisation de reviewItemFilm a été modifié");
+		if (nbBooks != sn.nbBooks()) {
+			System.out.println("Erreur  :  le nombre de Books après utilisation de reviewItemBook a été modifié");
 			nbErreurs++;
 		}
 		nbTests++;
-		if (nbBooks != sn.nbBooks()) {
-			System.out.println("Erreur  :  le nombre de livres après utilisation de reviewItemFilm a été modifié");	
+		if (nbFilms != sn.nbFilms()) {
+			System.out.println("Erreur  :  le nombre de Films après utilisation de reviewItemBook a été modifié");	
 			nbErreurs++;
 		}
 		nbTests++;
 		if (nbMembers != sn.nbMembers()) {
-			System.out.println("Erreur  :  le nombre de membres après utilisation de reviewItemFilm a été modifié");	
+			System.out.println("Erreur  :  le nombre de membres après utilisation de reviewItemBook a été modifié");	
 			nbErreurs++;
 		}
 
 		// ce n'est pas du test, mais cela peut "rassurer"...
 		System.out.println(sn);
-
-		// bilan du test de addItemFilm
-		System.out.println("TestsReviewItemFilm :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués");
+		// bilan du test de addItemBook
+		System.out.println("TestsReviewItemBook :   " + nbErreurs + " erreur(s) / " +  nbTests + " tests effectués");
 		//On modifie l'argument qui sera utilisé dans le prochain test
 				//Comme l'argument est de type string, on doit effectuer des conversion de type
 				if ((args != null) && (args.length == 2)) {        

@@ -49,6 +49,17 @@ public class Film extends Item {
 	public Film(){
 		
 	}
+	
+	public String toString(){
+		int nbOccurence=0;
+		float moyenne = 0;
+		for(Review reviewElement : review){
+			nbOccurence++;
+			moyenne=((moyenne*(nbOccurence-1))+reviewElement.getNote())/nbOccurence;
+		}
+		String retour = "Film: " + titre + " Note: " + moyenne +" ("+ nbOccurence+" review(s) )";
+		return retour;
+	}
 
 	/** 
 	 * Getter of the property <tt>socialNetwork</tt>

@@ -287,7 +287,23 @@ public class SocialNetwork {
 	 * (une liste vide si aucun item ne correspond) 
 	 */
 	public LinkedList <String> consultItems(String nom) throws BadEntry {
-		return new LinkedList <String> ();
+		if(nom==null||nom.trim().length()<1){
+			throw new BadEntry("test");
+		}
+		
+		LinkedList<String> resultat = new LinkedList<String>();
+		for(Film film : films){
+			if(film.getTitre().trim().equalsIgnoreCase(nom.trim())){
+				resultat.addLast(film.toString());;
+			}
+		}
+		for(Book book : books){
+			if(book.getTitre().trim().equalsIgnoreCase(nom.trim())){
+				resultat.addLast(book.toString());;
+			}
+		}
+		
+		return resultat;
 	}
 
 
@@ -417,7 +433,77 @@ public class SocialNetwork {
 	 * @return la note moyenne des notes sur ce livre
 	 */
 	public float reviewItemBook(String pseudo, String password, String titre, float note, String commentaire) throws BadEntry, NotMember, NotItem {
-		return 0.0f;
+		//On test toutes les possibilités du BadEntry
+				if(pseudo==null||pseudo.trim().length()<1||password==null||password.trim().length()<4||titre==null||titre.trim().length()<1||note<0||note>5||commentaire==null){
+					//On renvoi le BadEntry si nécessaire
+					throw new BadEntry("test");
+				}
+
+				int state=0;
+				for(Member member : members){
+					if(member.getPseudo().trim().equalsIgnoreCase(pseudo.trim())&& member.getPassword().trim().equals(password.trim())){
+						state=1;
+					}
+				}
+				if(state!=1){
+					throw new NotMember("Test");
+				}
+
+				state=0;
+				for(Book book : books){
+					if(book.getTitre().trim().equalsIgnoreCase(titre.trim())){
+						state=1;
+					}
+				}
+				if(state!=1){
+					throw new NotItem("Test");
+				}
+				/*--------------------------------------------------------------------------------------------------------------*/
+				Review review;
+				float moyenne=0;
+				int nbOccurence=0;
+
+				for(Member member : members){
+					if(member.getPseudo().trim().equalsIgnoreCase(pseudo.trim())){
+						review = new Review(titre,note,commentaire,member);	
+
+
+						for(Book book : books){
+							if(book.getTitre().trim().equalsIgnoreCase(titre.trim())){
+
+								if(!book.getReview().isEmpty()){
+
+
+
+
+									for(Review reviewElement : book.getReview()){
+										if(reviewElement.getMember().getPseudo().trim().equalsIgnoreCase(pseudo.trim())){
+											book.getReview().remove(reviewElement);
+										}
+										
+									}
+									
+									
+									book.addReview(review);
+									
+									
+								}
+								else{
+									
+									book.addReview(review);
+								}
+								for(Review reviewElement : book.getReview()){
+									nbOccurence++;
+									moyenne=((moyenne*(nbOccurence-1))+reviewElement.getNote())/nbOccurence;
+								}
+
+							}
+						}
+
+					}
+				}
+				
+				return moyenne;
 	}
 
 
@@ -427,65 +513,22 @@ public class SocialNetwork {
 	 * @return la chaîne de caractères représentation textuelle du <i>SocialNetwork</i> 
 	 */
 	public String toString() {
-		return "";
+		String retour;
+		retour="\n Nombre de membre: "+members.size()+"\n---------------------\n";
+		for(Member member : members){
+			retour+=member.toString() + "\n";
+		}
+		retour+="\n Nombre de films: "+films.size()+"\n---------------------\n";
+		for(Film film : films){
+			retour+=film.toString() + "\n";
+		}
+		retour+="\n Nombre de books: "+books.size()+"\n---------------------\n";
+		for(Book book : books){
+			retour+=book.toString() + "\n";
+		}
+		
+		return retour;
 	}
-
-
-	/**
-	 * Getter of the property <tt>members</tt>
-	 * @return  Returns the member.
-	 * @uml.property  name="members"
-	 */
-	public LinkedList<Member> getMembers() {
-		return members;
-	}
-
-	/**
-	 * Setter of the property <tt>members</tt>
-	 * @param members  The member to set.
-	 * @uml.property  name="members"
-	 */
-	public void setMembers(LinkedList<Member> members) {
-		this.members = members;
-	}
-
-	/**
-	 * Getter of the property <tt>films</tt>
-	 * @return  Returns the film.
-	 * @uml.property  name="films"
-	 */
-	public LinkedList<Film> getFilms() {
-		return films;
-	}
-
-	/**
-	 * Setter of the property <tt>films</tt>
-	 * @param films  The film to set.
-	 * @uml.property  name="films"
-	 */
-	public void setFilms(LinkedList<Film> films) {
-		this.films = films;
-	}
-
-	/**
-	 * Getter of the property <tt>books</tt>
-	 * @return  Returns the book.
-	 * @uml.property  name="books"
-	 */
-	public LinkedList<Book> getBooks() {
-		return books;
-	}
-
-	/**
-	 * Setter of the property <tt>books</tt>
-	 * @param books  The book to set.
-	 * @uml.property  name="books"
-	 */
-	public void setBooks(LinkedList<Book> books) {
-		this.books = books;
-	}
-
-
 
 
 

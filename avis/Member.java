@@ -5,7 +5,7 @@ import java.util.LinkedList;
 
 
 public class Member extends Visiteur {
-	
+
 	/** 
 	 * @uml.property name="socialNetwork"
 	 * @uml.associationEnd multiplicity="(1 1)" inverse="members:avis.SocialNetwork"
@@ -36,11 +36,11 @@ public class Member extends Visiteur {
 		this.password=password;
 		this.profil=profil;
 	}
-	
+
 	public Member(){
-		
+
 	}
-	
+
 	/** 
 	 * Getter of the property <tt>socialNetwork</tt>
 	 * @return  Returns the socialNetwork.
@@ -131,13 +131,17 @@ public class Member extends Visiteur {
 		this.profil = profil;
 	}
 
-		
-		/**
-		 */
-		public void checkId(){
-		}
 
-			
-			
+	/**
+	 */
+	public void checkId(){
+	}
+
+	public String toString(){
+		String retour=pseudo;
+		return retour;
+	}
+
+
 
 }

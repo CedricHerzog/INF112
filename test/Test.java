@@ -31,7 +31,18 @@ public class Test {
            
            //Lancement du test de commentaire
            TestReviewItemFilm.main(resultats);
+           System.out.println("\n\n ***************************************\n");      
            
+           //Lancement du test d'ajout de livre
+           TestAddItemBook.main(resultats);
+           System.out.println("\n\n ***************************************\n");
+           
+           //Lancement du test de commentaire
+           TestReviewItemBook.main(resultats);
+           System.out.println("\n\n ***************************************\n");
+           
+         //Lancement du test de consultation
+           TestConsultItem.main(resultats);
            System.out.println("\n\n ***************************************\n");
            
                       
